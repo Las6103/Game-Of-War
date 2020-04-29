@@ -6,5 +6,12 @@ let playerOne = [];
 let playerTwo = [];
 
 function getDeck() {
-  for (let i = 0; i < suit.length; i++) {}
+  for (let i = 0; i < suit.length; i++) {
+    for (let j = 0; j < rank.length; j++) {
+      deckOfCards.push(rank[j]);
+    }
+  }
+  return deckOfCards;
 }
+
+console.log(getDeck());

@@ -3,9 +3,31 @@ Step One - Create Board
 2 players
 Each player will get 26 cards.
 these cards will be distrubited at random.
-create an array of objects
+create an object with arrays
 OBJECTS
 rank: 2,3,4,5,6,7,8,9,10,J,Q,K,A
 value: 2-10,11,12,13,14
 suit: hearts spades clubs diamonds
+Use loops to create all 52 cards.
+suit must loop through rank
+Assign each player 26 cards using Math.random
+they will each have an array
+
+Step 2
+game round function
+.pop one card out of each players array
+compare rank/value
+use conditional statement
+card with higher number wins the round
+winner get both cards popped into their deck (array)
+if the value is the same pop 3 cards and then compare 4th.
+winner gains all cards
+round end 
+reintiate new round and follow this function
+game wi
+
+Step 3
+
+
+
 
