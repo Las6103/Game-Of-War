@@ -2,6 +2,7 @@ const suit = ["hearts", "spades", "clubs", "diamonds"];
 const rank = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
 const value = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 let deckOfCards = [];
+let randomDeck = [];
 let playerOne = [];
 let playerTwo = [];
 
@@ -15,21 +16,17 @@ function getDeck() {
   return deckOfCards;
 }
 
-// Assigns 26 cards to each player
-function assignDeck() {
+// Randomize the deckOfCards array
+function randomizeDeck() {
   let deck = getDeck();
-  console.log(deck);
-    deck = deck[Math.floor(Math.random() * deck.length)];
-    console.log(deck);
-  function randomDeck() {
-    playerOne = deck.splice(0, 26);
-    playerTwo = deck.splice(0, 26);
-    console.log(deck);
-  }
-  return randomDeck();
+    for (let i = 0; i < deck.length; i++) {
+        let rand = deck[Math.floor(Math.random() * deck.length)];
+        randomDeck.push(rand);
+    }
+    console.log(randomDeck);
+    return randomDeck;
 }
+randomizeDeck();
 
-assignDeck();
 
-console.log(playerOne);
-console.log(playerTwo);
+
