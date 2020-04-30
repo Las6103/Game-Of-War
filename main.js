@@ -26,7 +26,6 @@ function randomizeDeck() {
   return randomDeck;
 }
 
-
 // Assign Deck to players
 function assignDeck() {
   function deckValue() {
@@ -38,9 +37,9 @@ function assignDeck() {
 
 // Intiate the game
 function gameStart() {
-    createDeck();
-    randomizeDeck();
-    assignDeck();
+  createDeck();
+  randomizeDeck();
+  assignDeck();
 }
 gameStart();
 
