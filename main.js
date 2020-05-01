@@ -60,34 +60,33 @@ function rounds() {
       let playerOnePop = playerOne.pop();
       playerTwo.unshift(playerOnePop);
       // TODO: Create details function
-    // }
+   }
   
 }
 rounds();
 
 // WAR!!!!
-
 function war() {
   let playerOneWar = playerOne.splice(playerOne.length - 3);
   let playerTwoWar = playerTwo.splice(playerTwo.length - 3);
+  let oneTwoWar = playerOneWar.concat(playerTwoWar);
+  let playerOneNewDeck = oneTwoWar.concat(playerOne);
+  let playerTwoNewDeck = oneTwoWar.concat(playerTwo);
   if (playerOneWar[0] === playerTwoWar[0]) {
     war();
   } else if (playerOneWar[0] > playerTwoWar[0]) {
-    playerOne.unshift(playerOneWar, playerTwoWar);
+    playerOne = playerOneNewDeck;
   } else {
-    playerTwo.unshift(playerOneWar, playerTwoWar);
+    playerTwo = playerTwoNewDeck;
   }
 }
 
 console.log(playerOne);
 console.log(playerTwo);
 
-// if equals headass boy
-// make a while loop if numbers are the same
-// two variables playerOneWar playerTwoWar
-// playerOneWar equals playerOne.splice(playerOne.length - 3);
-// playerTwoWar equals playerTwo.splice(playerTwo.length - 3);
-// if playerOneWar[0] > playerTwoWar[0]
-// unshift playerTwoWar to playerOne array
-// else if playerOneWar[0] < playerTwoWar[0]
-// unshift playerOneWar to playerTwo array
+
+// create one variable that contains the 6 cards
+// oneTwoWar
+// create new variable that concats the 6 cards and all previous cards
+// from either player one or two
+// set playerOne or playerTwo cards equal to new array.
