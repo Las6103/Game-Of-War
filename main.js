@@ -50,7 +50,7 @@ function rounds() {
     console.log(playerOneCards);
     console.log(playerTwoCards);
     if (playerOneCards === playerTwoCards) {
-
+      war();
       // TODO: Create details function
     } else if (playerOneCards > playerTwoCards) {
       let playerTwoPop = playerTwo.pop();
@@ -60,29 +60,34 @@ function rounds() {
       let playerOnePop = playerOne.pop();
       playerTwo.unshift(playerOnePop);
       // TODO: Create details function
-    }
-  // }
+    // }
+  
 }
 rounds();
+
+// WAR!!!!
+
+function war() {
+  let playerOneWar = playerOne.splice(playerOne.length - 3);
+  let playerTwoWar = playerTwo.splice(playerTwo.length - 3);
+  if (playerOneWar[0] === playerTwoWar[0]) {
+    war();
+  } else if (playerOneWar[0] > playerTwoWar[0]) {
+    playerOne.unshift(playerOneWar, playerTwoWar);
+  } else {
+    playerTwo.unshift(playerOneWar, playerTwoWar);
+  }
+}
+
 console.log(playerOne);
 console.log(playerTwo);
 
-// compare the last numbers of array, use .length -1 to compare last element in array
-// make variables playerOneCards and playerTwoCards, compare
-// if playerOneCards > playerTwoCards then .pop playerTwoCards
-// use unshift to transfer card into playerOnceCards
-// else if
-// if playerOneCards < playerTwoCards then .pop playerOneCards
-// use unshift to transfer card into playerTwoCards
-// else
-// playerOneCards = playerTwoCards then
-//.length -4
-
-
-
-
-// greater number wins round BUT
-// if number is the same then
-// remove 3 cards from each array
-// compare the 4th card
-// greater number wins all the cards
+// if equals headass boy
+// make a while loop if numbers are the same
+// two variables playerOneWar playerTwoWar
+// playerOneWar equals playerOne.splice(playerOne.length - 3);
+// playerTwoWar equals playerTwo.splice(playerTwo.length - 3);
+// if playerOneWar[0] > playerTwoWar[0]
+// unshift playerTwoWar to playerOne array
+// else if playerOneWar[0] < playerTwoWar[0]
+// unshift playerOneWar to playerTwo array
