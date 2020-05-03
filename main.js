@@ -1,19 +1,34 @@
+class Card {
+  constructor(suit, rank, value) {
+    this.suit = suit;
+    this.rank = rank;
+    this.value = value;
+  }
+}
+
+const hearts = new Card ('hearts', 'Ace', '14');
+console.log(hearts);
+
+
 const suit = ["hearts", "spades", "clubs", "diamonds"];
-const rank = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+const rank = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
+const value = [2,3,4,5,6,7,8,9,10,11,12,13,14]
 let deckOfCards = [];
 let randomDeck = [];
 let playerOne = [];
 let playerTwo = [];
-
 // Creates Deck of 52 cards
 function createDeck() {
   for (let i = 0; i < suit.length; i++) {
     for (let j = 0; j < rank.length; j++) {
-      deckOfCards.push(rank[j]);
+      const newCard = new Card (suit[i], rank[j], value[j]);
+      deckOfCards.push(newCard);
     }
   }
   return deckOfCards;
-}
+};
+
+console.log(deckOfCards);
 
 // Randomize the deckOfCards array
 function randomizeDeck() {
@@ -23,7 +38,10 @@ function randomizeDeck() {
     randomDeck.push(rand);
   }
   return randomDeck;
-}
+};
+randomizeDeck();
+console.log(randomDeck);
+
 
 // Assign Deck to players
 function assignDeck() {
@@ -32,61 +50,86 @@ function assignDeck() {
     playerTwo = randomDeck.splice(0, 26);
   }
   return deckValue();
-}
-
-// Intiate the game
-function gameStart() {
-  createDeck();
-  randomizeDeck();
-  assignDeck();
-}
-gameStart();
-
-// Rounds
-function rounds() {
-  // while (playerOne.length < 52 || playerTwo.length < 52) {
-    let playerOneCards = playerOne[playerOne.length - 1];
-    let playerTwoCards = playerTwo[playerTwo.length - 1];
-    console.log(playerOneCards);
-    console.log(playerTwoCards);
-    if (playerOneCards === playerTwoCards) {
-      war();
-      // TODO: Create details function
-    } else if (playerOneCards > playerTwoCards) {
-      let playerTwoPop = playerTwo.pop();
-      playerOne.unshift(playerTwoPop);
-      // TODO: Create details function
-    } else {
-      let playerOnePop = playerOne.pop();
-      playerTwo.unshift(playerOnePop);
-      // TODO: Create details function
-   }
-  
-}
-rounds();
-
-// WAR!!!!
-function war() {
-  let playerOneWar = playerOne.splice(playerOne.length - 3);
-  let playerTwoWar = playerTwo.splice(playerTwo.length - 3);
-  let oneTwoWar = playerOneWar.concat(playerTwoWar);
-  let playerOneNewDeck = oneTwoWar.concat(playerOne);
-  let playerTwoNewDeck = oneTwoWar.concat(playerTwo);
-  if (playerOneWar[0] === playerTwoWar[0]) {
-    war();
-  } else if (playerOneWar[0] > playerTwoWar[0]) {
-    playerOne = playerOneNewDeck;
-  } else {
-    playerTwo = playerTwoNewDeck;
-  }
-}
-
+};
+assignDeck();
 console.log(playerOne);
 console.log(playerTwo);
 
+// // Intiate the game
+// function gameStart() {
+//   createDeck();
+//   randomizeDeck();
+//   assignDeck();
+// };
+// gameStart();
 
-// create one variable that contains the 6 cards
-// oneTwoWar
-// create new variable that concats the 6 cards and all previous cards
-// from either player one or two
-// set playerOne or playerTwo cards equal to new array.
+
+// last card of array functino
+function topCard(arr) {
+  return arr[arr.length - 1].value;
+};
+
+// Intial score
+let score = {
+  One: 0,
+  Two: 0
+};
+
+// console.log(playerOne);
+// console.log(playerTwo);
+// Rounds
+function rounds() {
+  // TODO: Fix Loop
+  let roundWinner = "";
+  let cardsInPlay = [];
+  while (playerOne.length < 52 && playerTwo.length < 52) {
+    if (topCard(playerOne) === topCard(playerTwo)) {
+      cardsInPlay.unshift(
+        ...playerOne.splice(playerOne.length - 3),
+        ...playerTwo.splice(playerTwo.length - 3)
+      );
+      continue;
+      // TODO: Create details function
+    } else if (topCard(playerOne) > topCard(playerTwo)) {
+      roundWinner = "PlayerOne";
+      cardsInPlay.unshift(playerTwo.pop());
+      // TODO: Create details function
+    } else {
+      roundWinner = "PlayerTwo";
+      cardsInPlay.unshift(playerOne.pop());
+      // TODO: Create details function
+    }
+
+    // Winner Cards
+    if (roundWinner === 'PlayerOne') {
+      console.log(cardsInPlay);
+      playerOne.unshift(...cardsInPlay);
+      console.log(`Player one wins ${details(cardsInPlay)}`);
+      cardsInPlay = [];
+      score.One += 1;
+    } else {
+      console.log(cardsInPlay);
+      playerTwo.unshift(...cardsInPlay);
+      console.log(`Player Two wins ${details(cardsInPlay)}`);
+      cardsInPlay = [];
+      score.Two += 1;
+    }
+  }
+}
+rounds();
+
+function details(cardsInPlay) {
+  let cardsInPlayRank = [];
+  for (let i = 0; i < cardsInPlay.length; i++){
+    cardsInPlayRank.push(cardsInPlay[i].rank);
+  }
+  return cardsInPlayRank;
+}
+
+
+// WAR!!!!
+console.log('score: ', score)
+console.log('player one: ', playerOne);
+console.log('player two: ', playerTwo);
+
+
