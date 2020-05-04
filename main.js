@@ -6,13 +6,9 @@ class Card {
   }
 }
 
-const hearts = new Card ('hearts', 'Ace', '14');
-console.log(hearts);
-
-
 const suit = ["hearts", "spades", "clubs", "diamonds"];
-const rank = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
-const value = [2,3,4,5,6,7,8,9,10,11,12,13,14]
+const rank = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
+const value = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 let deckOfCards = [];
 let randomDeck = [];
 let playerOne = [];
@@ -21,12 +17,12 @@ let playerTwo = [];
 function createDeck() {
   for (let i = 0; i < suit.length; i++) {
     for (let j = 0; j < rank.length; j++) {
-      const newCard = new Card (suit[i], rank[j], value[j]);
+      const newCard = new Card(suit[i], rank[j], value[j]);
       deckOfCards.push(newCard);
     }
   }
   return deckOfCards;
-};
+}
 
 console.log(deckOfCards);
 
@@ -38,10 +34,8 @@ function randomizeDeck() {
     randomDeck.push(rand);
   }
   return randomDeck;
-};
+}
 randomizeDeck();
-console.log(randomDeck);
-
 
 // Assign Deck to players
 function assignDeck() {
@@ -50,67 +44,79 @@ function assignDeck() {
     playerTwo = randomDeck.splice(0, 26);
   }
   return deckValue();
-};
+}
 assignDeck();
 console.log(playerOne);
 console.log(playerTwo);
 
-// // Intiate the game
-// function gameStart() {
-//   createDeck();
-//   randomizeDeck();
-//   assignDeck();
-// };
-// gameStart();
-
-
 // last card of array functino
 function topCard(arr) {
   return arr[arr.length - 1].value;
-};
+}
+
+function log(arr) {
+  return arr[arr.length - 1].rank;
+}
 
 // Intial score
 let score = {
   One: 0,
-  Two: 0
+  Two: 0,
 };
 
-// console.log(playerOne);
-// console.log(playerTwo);
 // Rounds
 function rounds() {
-  // TODO: Fix Loop
   let roundWinner = "";
   let cardsInPlay = [];
   while (playerOne.length < 52 && playerTwo.length < 52) {
+    
+    // War Situation
     if (topCard(playerOne) === topCard(playerTwo)) {
       cardsInPlay.unshift(
         ...playerOne.splice(playerOne.length - 3),
         ...playerTwo.splice(playerTwo.length - 3)
       );
       continue;
-      // TODO: Create details function
+
+      // Player One Winner
     } else if (topCard(playerOne) > topCard(playerTwo)) {
       roundWinner = "PlayerOne";
+      cardsInPlay.unshift(playerOne.pop());
       cardsInPlay.unshift(playerTwo.pop());
-      // TODO: Create details function
+      // Player Two Winner
     } else {
       roundWinner = "PlayerTwo";
+      cardsInPlay.unshift(playerTwo.pop());
       cardsInPlay.unshift(playerOne.pop());
-      // TODO: Create details function
     }
 
     // Winner Cards
-    if (roundWinner === 'PlayerOne') {
+    if (roundWinner === "PlayerOne") {
+      console.log("player one: ", playerOne);
+      console.log("player two: ", playerTwo);
       console.log(cardsInPlay);
       playerOne.unshift(...cardsInPlay);
-      console.log(`Player one wins ${details(cardsInPlay)}`);
+      console.log(
+        `Player one got away with ${details(
+          cardsInPlay
+        )} | Player One plays a ${log(playerOne)} | Player Two plays a ${log(
+          playerTwo
+        )}`
+      );
+      
       cardsInPlay = [];
       score.One += 1;
     } else {
+      console.log("player one: ", playerOne);
+      console.log("player two: ", playerTwo);
       console.log(cardsInPlay);
       playerTwo.unshift(...cardsInPlay);
-      console.log(`Player Two wins ${details(cardsInPlay)}`);
+      console.log(
+        `Player Two snatched ${details(cardsInPlay)} | Player One plays a ${log(
+          playerOne
+        )} | Player Two plays a ${log(playerTwo)}`
+      );
+      
       cardsInPlay = [];
       score.Two += 1;
     }
@@ -118,18 +124,20 @@ function rounds() {
 }
 rounds();
 
+// Details of Round
 function details(cardsInPlay) {
   let cardsInPlayRank = [];
-  for (let i = 0; i < cardsInPlay.length; i++){
-    cardsInPlayRank.push(cardsInPlay[i].rank);
+  if (cardsInPlay.length > 0) {
+    for (let i = 0; i < cardsInPlay.length; i++) {
+      cardsInPlayRank.push(cardsInPlay[i].rank);
+    }
+    return cardsInPlayRank;
+  } else {
+    console.log("Game Over");
   }
-  return cardsInPlayRank;
 }
 
-
 // WAR!!!!
-console.log('score: ', score)
-console.log('player one: ', playerOne);
-console.log('player two: ', playerTwo);
-
-
+console.log("score: ", score);
+console.log("player one: ", playerOne);
+console.log("player two: ", playerTwo);
