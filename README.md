@@ -1,4 +1,8 @@
 
+# What is War?
+Two players start the game by splitting a deck of 52 standard playing cards evenly. Each stack is facedown, and players cannot look at the cards in their stack or rearrange them.
+The objective of the game is to play until one player has all 52 cards in their stack. (Stole this from GA repo)
+
 # Getting Started
 Simply pop open a browser of your choice and load into the console.
 Once you're in the console you will see the game logged out!
