@@ -61,7 +61,7 @@ function log(arr) {
   if (arr[arr.length - 1]) {
     return arr[arr.length - 1].rank;
   }
-  return "";
+  return "No Cards Remaining";
 }
 
 // Rounds of Game
@@ -86,7 +86,6 @@ function rounds() {
       playerTwoWinner();
     }
   }
-  console.log("Game Over " + roundWinner + " wins");
   gameReview();
 }
 
@@ -122,19 +121,24 @@ function popCardWar() {
       playerOne
     )} | Player Two places a ${log(playerTwo)}`
   );
+  console.log(cardsInPlay.map(card => card.rank));
 }
 
 // Player One Wins
 function playerOneWinner() {
   playerOne.unshift(...cardsInPlay);
   roundsplayed++;
-  console.log(
-    `Player one got away with ${details(
-      cardsInPlay
-    )}  | End of round ${roundsplayed} | Player One plays a ${log(
-      playerOne
-    )} | Player Two plays a ${log(playerTwo)}`
-  );
+  if (playerOne.length > 0 && playerTwo.length > 0) {
+    console.log(
+      `Player one got away with ${details(
+        cardsInPlay
+      )}  | End of round ${roundsplayed} | Player One plays a ${log(
+        playerOne
+      )} | Player Two plays a ${log(playerTwo)}`
+    );
+  } else {
+    console.log("Player One Wins");
+  }
   cardsInPlay = [];
   score.One += 1;
 }
@@ -143,13 +147,17 @@ function playerOneWinner() {
 function playerTwoWinner() {
   playerTwo.unshift(...cardsInPlay);
   roundsplayed++;
-  console.log(
-    `Player Two snatched ${details(
-      cardsInPlay
-    )} | End of round ${roundsplayed} | Player One plays a ${log(
-      playerOne
-    )} | Player Two plays a ${log(playerTwo)}`
-  );
+  if (playerOne.length > 0 && playerTwo.length > 0) {
+    console.log(
+      `Player Two snatched ${details(
+        cardsInPlay
+      )} | End of round ${roundsplayed} | Player One plays a ${log(
+        playerOne
+      )} | Player Two plays a ${log(playerTwo)}`
+    );
+  } else {
+    console.log("Player Two Wins");
+  }
   cardsInPlay = [];
   score.Two += 1;
 }
@@ -159,6 +167,7 @@ function details(cardsInPlay) {
   return cardsInPlay.map((card) => card.rank);
 }
 
+// Overview of Game
 function gameReview() {
   console.log("Score: ", score);
   console.log(
