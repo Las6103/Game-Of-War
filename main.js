@@ -120,7 +120,7 @@ function popCardWar() {
       playerOne
     )} | Player Two places a ${log(playerTwo)}`
   );
-  console.log(cardsInPlay.map(card => card.rank));
+  console.log(cardsInPlay.map((card) => card.rank));
 }
 
 // Player One Wins
