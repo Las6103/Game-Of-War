@@ -1,4 +1,3 @@
-# Game-Of-War
 
 # Getting Started
 Simply pop open a browser of your choice and load into the console.
@@ -11,3 +10,5 @@ Everytime a round is completed a console log will pass through. Here you will se
 # Creator
 Leonardo Silva
 
+## Roast Me
+Feel free to obliterate my code and roast my poorly made Markdown
